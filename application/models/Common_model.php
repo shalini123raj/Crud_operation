@@ -1,0 +1,193 @@
+<?php
+class Common_model extends CI_Model
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    function save_data($table, $val)
+    {
+        return $this->db->insert($table, $val);
+    }
+
+    public function select_multi($data, $table, $where = "1=1")
+    {
+        $this->db->select($data)->from($table)->where($where)->order_by('id', 'DESC')->limit(1);
+        $result = $this->db->get()->row();
+
+        return $result;
+    }
+    public function select($data, $table, $where = "1=1")
+    {
+        $this->db->select($data)->from($table)->where($where)->order_by('id', 'DESC')->limit(1);
+        $result = $this->db->get()->row();
+
+        return $result->$data;
+    }
+
+    function all_data($table,$sel)
+    {
+        return $this-> db->select($sel)->order_by('id', 'DESC')->get($table)->result_array();
+    }
+
+    function all_data_con($table,$con,$sel)
+    {
+        return $this->db->select($sel)->where($con)->get($table)->result_array();
+    }
+
+    function get_data($table,$con,$sel)
+    {
+        return $this->db->select($sel)->where($con)->get($table)->row_array();
+    }
+
+    function get_last($table, $sel)
+    {
+        return $this->db->select($sel)->order_by('id', 'DESC')->get($table)->row_array();
+    }
+
+    function update_data($table,$con,$data)
+    {
+        $this->db->where($con);
+        return $this->db->update($table, $data);
+    }
+
+    function del_data($val)
+    {
+        if ($val) {
+            $this->db->where('id', $val['id']);
+            $query = $this->db->delete($val['table']);
+            if ($query) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function chageStatus($value)
+    {
+        $this->db->where('id', $value['id'])->update($value['table'], array('status' => $value['status']));
+    }
+
+
+
+    public function count_all($table, $where = "1=1")
+    {
+        $this->db->from($table);
+        $this->db->where($where);
+
+        return $this->db->count_all_results();
+    }
+
+    public function sum_all($sum, $table, $where = "1=1")
+    {
+        $this->db->select_sum($sum);
+        $this->db->from($table);
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function sum($data, $table, $where = "1=1")
+    {
+        $this->db->select_sum($data);
+        $this->db->where($where);
+        $this->db->from($table);
+
+        $result = $this->db->get()->row();
+
+        return $result->$data;
+
+    }
+    
+    function getIndianCurrency(float $number)
+    {
+        $decimal = round($number - ($no = floor($number)), 2) * 100;
+        $hundred = null;
+        $digits_length = strlen($no);
+        $i = 0;
+        $str = array();
+        $words = array(
+            0 => '', 1 => 'One', 2 => 'Two',
+            3 => 'Three', 4 => 'Four', 5 => 'Five', 6 => 'Six',
+            7 => 'Seven', 8 => 'Eight', 9 => 'Nine',
+            10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve',
+            13 => 'Thirteen', 14 => 'Fourteen', 15 => 'Fifteen',
+            16 => 'Sixteen', 17 => 'Seventeen', 18 => 'Eighteen',
+            19 => 'Nineteen', 20 => 'Twenty', 30 => 'Thirty',
+            40 => 'Forty', 50 => 'Fifty', 60 => 'Sixty',
+            70 => 'Seventy', 80 => 'Eighty', 90 => 'Ninety'
+        );
+        $digits = array('', 'Hundred', 'Thousand', 'lakh', 'Crore');
+        while ($i < $digits_length) {
+            $divider = ($i == 2) ? 10 : 100;
+            $number = floor($no % $divider);
+            $no = floor($no / $divider);
+            $i += $divider == 10 ? 1 : 2;
+            if ($number) {
+                $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+                $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+                $str[] = ($number < 21) ? $words[$number] . ' ' . $digits[$counter] . $plural . ' ' . $hundred : $words[floor($number / 10) * 10] . ' ' . $words[$number % 10] . ' ' . $digits[$counter] . $plural . ' ' . $hundred;
+            } else $str[] = null;
+        }
+        $Rupees = implode('', array_reverse($str));
+        $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
+        return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+    }
+
+
+    function upload_image($path, $name)
+    {
+        $config['upload_path']          = './uploads/' . $path;
+        $config['allowed_types']        = 'jpg|png|jpeg';
+        // $config['max_size']             = 100;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload($name)) {
+            $upload_data =  $this->upload->data();
+            $image_path = "uploads/" . $path . '/' . $upload_data['file_name'];
+
+
+            $a = array('photo' => $image_path);
+            $this->session->set_userdata($a);
+
+
+            $val = array('text' => $image_path, 'status' => 1);
+        } else {
+            $val = array('text' => $this->upload->display_errors(), 'status' => 0);
+        }
+
+        return $val;
+    }
+
+
+    function php_mail_function($to, $subject, $msg)
+    {
+
+        $to = $to;
+        $subject = $subject;
+        $message = $msg;
+        $headers = "MIME-Version: 1.0" . "\r\n"; 
+        $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n"; 
+        $headers .= 'From:examsoftware@rajgir.online' . "\r\n" .
+                    'Reply-To:examsoftware@rajgir.online' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+        
+        if (mail($to, $subject, $message, $headers)) {
+            $status = 1;
+        } else {
+           $status=0;
+        }
+
+        return $status;
+    }
+
+
+
+}
