@@ -327,7 +327,8 @@
             <div class="jumbotron">
                 <h1 align="center">CRUD CI Operation</h1>
 
-            </div>
+            </div>                 
+
             <div class="container">
                 <div class="clear-fix">
                     <h3 style="float: left">All Students</h3>
@@ -391,8 +392,6 @@
                                     <label for="roll" class="text-black fw-bold">roll</label>
                                     <input type="text" name="roll" placeholder="enter your roll" class="from-control">
                                 </div>
-                               
-                            </div>
 
                             <div class="model-footer">
                                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="model">submit</button>
@@ -415,6 +414,16 @@
                 </div>
             
             <?php endif; ?>
+
+             <?php if($this->session->flashdata('inserted')): ?>
+                <div align="center" style="color:#FFF" class="bg-success">
+               <?php  echo $this->session->flashdata('inserted'); ?>
+                </div>
+            
+            <?php endif; ?>
+           
+
+         
 
             <footer class="footer text-center text-sm-start d-print-none">
                 <div class="container-fluid">

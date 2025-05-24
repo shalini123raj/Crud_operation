@@ -8,8 +8,23 @@ class Site extends CI_Controller
     function index()
     {
         $this->load->view('superadmin/base');
+       
         
     }
+    public function getStudentByid($id)
+{
+    //  echo "hrlk";
+     $this->load->model('Student_model');
+   
+    $data['students'] = $this->Student_model->select('*', 'student', ['id' => $id]);
+
+     
+;    $this->load->view('superadmin/view',$data);
+    
+
+     
+}
+
 
     public function addstudent()
     {
@@ -32,29 +47,23 @@ class Site extends CI_Controller
       
 
     }
-    else
-    {
+    else {
+            $result = $this->Student_model->insert_student([
+                'name' => $this->input->post('name'),
+                'roll' => $this->input->post('roll'),
 
-        $data = array(
-               
-                   'name' => $this->input->post('name'),
-                   'roll' => $this->input->post('roll'),
-               );
-            
-               if ($this->Student_model->insert_student($data)) {
-                 } else {
-                    $this->session->set_flashdata('success', 'Student added successfully!');
-                 }
-               redirect('site');
-    }
+            ]); 
+            if($result){
+                 $this->session->set_flashdata('inserted', 'your data has been successfully added!');
+
+            } 
+            redirect('Site ');
+        } 
     
 
-        }
-     
-    }
-   
+        }  
     
- 
+    }       
 
 
-?>
+?>  

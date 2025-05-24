@@ -12,14 +12,23 @@ class Student_model extends CI_Model
 
     public function insert_student($data)
     {
-        $this->db->insert('student',$data);   
+       $query =  $this->db->insert('student',$data); 
+       if($query){
+        return true;
+       } 
+       else{
+        return false;
+       } 
 
     }
 
-    public function update_student($data)
+    public function select($data, $table, $where )
     {
-        $this->db->replace('student', $data);
-    
+       
+      $this->db->select($data)->from($table)->where($where);
+      $result = $this->db->get()->row_array();
+
+    return $result;
 
     }
 
