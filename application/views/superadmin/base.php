@@ -389,7 +389,7 @@
                                 </div>
                                 <div class="from-group d-flex flex-column">
                                     <label for="roll" class="text-black fw-bold">roll</label>
-                                    <input type="text" roll="roll" placeholder="enter your roll" class="from-control">
+                                    <input type="text" name="roll" placeholder="enter your roll" class="from-control">
                                 </div>
                                
                             </div>
@@ -408,6 +408,13 @@
                     </div>
                 </div>
             </div>
+
+            <?php if($this->session->flashdata('error')): ?>
+                <div align="center" style="color:#FFF" class="bg-danger">
+               <?php  echo $this->session->flashdata('error'); ?>
+                </div>
+            
+            <?php endif; ?>
 
             <footer class="footer text-center text-sm-start d-print-none">
                 <div class="container-fluid">
