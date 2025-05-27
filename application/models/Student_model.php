@@ -9,6 +9,14 @@ class Student_model extends CI_Model
         
 
     }
+    public function getAllStudent()
+    {
+      $query = $this->db->get('student');
+      if($query){
+        return $query->result();
+
+      }
+    }
 
     public function insert_student($data)
     {
@@ -29,6 +37,32 @@ class Student_model extends CI_Model
       $result = $this->db->get()->row_array();
 
     return $result;
+
+    }
+    public function getsinglestudent($id)
+    {
+      $this->db->where('id', $id);
+      $query= $this->db->get('student');
+      if($query){
+        return $query->row();
+
+      }
+
+
+
+    }
+
+    public function updatestudent($data, $id)
+    {
+      $this->db->where('id', $id);
+      $query = $this->db->update('student', $data);
+      if($query){
+        return true;
+
+      }
+      else{
+        return false;
+      }
 
     }
 

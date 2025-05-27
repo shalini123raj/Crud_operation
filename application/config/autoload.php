@@ -132,6 +132,6 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Common_model');
+$autoload['model'] = array('Common_model', 'Student_model' );
 
 $autoload['time_zone'] = date_default_timezone_set("Asia/Kolkata");

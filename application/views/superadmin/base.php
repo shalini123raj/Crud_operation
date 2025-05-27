@@ -5,7 +5,7 @@
 
 
     <meta charset="utf-8" />
-    <title>Dashboard | Dastone - Admin & Dashboard Template</title>
+    <title style="color: red;">Dashboard | Dastone - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="" name="author" />
@@ -325,7 +325,7 @@
             <!-- wrte code here start -->
 
             <div class="jumbotron">
-                <h1 align="center">CRUD CI Operation</h1>
+                <h1 align="center" style="color:aqua;">CRUD CI Operation</h1>
 
             </div>                 
 
@@ -337,32 +337,43 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>Student Id</th>
-                            <th>Student Name</th>
-                            <th>Student Roll</th>
-                            <th>Action</th>
+                            <th style="color: red;">Student Id</th>
+                            <th style="color:red;">Student Name</th>
+                            <th style="color:red">Student Roll</th>
+                            <th style="color: red;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                      <?php foreach($student_details as $student):?>
                         <tr>
                             <td>
-                                1
+                                <?php echo $student->id; ?>
                             </td>
                             <td>
-                                Ram
+                                <?php echo $student->name; ?>
                             </td>
                             <td>
-                                125
+                                <?php echo $student->roll; ?>
                             </td>
                             <td>
-                                <a class="btn btn-info" href="#">Edit</a>
-                                <a class="btn btn-danger" href="#">Delete</a>
+                            <a href="<?php echo base_url();?>Site/editstudent/<?php echo $student->id; ?>"class="btn btn-success">Edit</a>
+                            <a href="#"class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
+
+                        <?php endforeach; ?>
+                           
+                       
                     </tbody>
                 </table>
 
             </div>
+            <!-- <pre>
+              <!-- <?php
+
+                //  print_r($student_details);
+                // ?>
+            </pre> -->
 
             <div class="modal fade" id="exampleModalFullscreenSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalFullscreenSmLabel" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen-sm-down">
@@ -379,11 +390,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="model-body p-2">
-                                <div class="from-group d-flex flex-column">
-                                    <label for="id" class="text-black fw-bold">id</label>
-                                    <input type="text" id="Id" placeholder="enter your id" class="from-control">
-                                </div>
+                           
                                 <div class="from-group my-3 d-flex flex-column">
                                     <label for="name" class="text-black fw-bold">name</label>
                                     <input type="text" name="name" placeholder="enter your name" class="from-control">
@@ -464,9 +471,10 @@
         <script src="<?php echo base_url(); ?>media/assets/js/pages/index.init.js"></script>
         <script src="<?php echo base_url(); ?>media/assets/js/app.js"></script>
 
+        <!-- Button trigger modal -->
+
+
 </body>
 <!--end body-->
-
-
 
 </html>
