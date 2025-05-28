@@ -357,7 +357,7 @@
                             </td>
                             <td>
                             <a href="<?php echo base_url();?>Site/editstudent/<?php echo $student->id; ?>"class="btn btn-success">Edit</a>
-                            <a href="#"class="btn btn-danger">Delete</a>
+                            <a href="<?php echo base_url();?>Site/deletestudent/<?php echo $student->id; ?>"class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
 
@@ -392,12 +392,12 @@
                             </div>
                            
                                 <div class="from-group my-3 d-flex flex-column">
-                                    <label for="name" class="text-black fw-bold">name</label>
-                                    <input type="text" name="name" placeholder="enter your name" class="from-control">
+                                    <label for="name" class="text-black fw-bold">Name</label>
+                                    <input type="text" name="name" placeholder="enter your Name" class="from-control">
                                 </div>
                                 <div class="from-group d-flex flex-column">
-                                    <label for="roll" class="text-black fw-bold">roll</label>
-                                    <input type="text" name="roll" placeholder="enter your roll" class="from-control">
+                                    <label for="roll" class="text-black fw-bold">Roll</label>
+                                    <input type="text" name="roll" placeholder="enter your Roll" class="from-control">
                                 </div>
 
                             <div class="model-footer">

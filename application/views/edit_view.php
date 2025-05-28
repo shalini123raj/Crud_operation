@@ -70,6 +70,15 @@
     <?php endif; ?>
 
 
+    <?php if ($this->session->flashdata('deleted')): ?>
+        <div align="center" style="color:#FFF" class="bg-success">
+            <?php echo $this->session->flashdata('deleted'); ?>
+        </div>
+
+    <?php endif; ?>
+
+
+
 
 
     <footer class="footer text-center text-sm-start d-print-none">

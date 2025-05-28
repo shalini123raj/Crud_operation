@@ -88,13 +88,31 @@ class Site extends CI_Controller
                 'roll' => $this->input->post('roll'),
 
             ], $id);
+
             if ($result) {
-                $this->session->set_flashdata('updated', 'your data has been successfully updated!');
+                $this->session->set_flashdata('inserted', 'your data has been successfully updated!');
             }
             redirect('Site');
         }
+
         
 
     }
 
+    public function deletestudent($id)
+    {
+         $result = $this->Student_model->deleteItem($id);
+
+    if ($result) {
+        $this->session->set_flashdata('inserted', 'The student has been deleted successfully.');
+    } else {
+        $this->session->set_flashdata('error', 'Failed to delete the student. Please try again.');
+    }
+
+    redirect('Site');
+        
+    }
+
 }
+
+?>
