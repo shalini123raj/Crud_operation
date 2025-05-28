@@ -27,7 +27,7 @@
                     </div>
                     <div class="from-group d-flex flex-column">
                         <label for="Roll" class="text-black fw-bold">Roll</label>
-                        <input type="text" style="color:darkgreen;" roll="roll" placeholder="Enter your roll" class="from-control" value="<?php echo $singlestudent->roll;?>">
+                        <input type="text" style="color:darkgreen;" name="roll" placeholder="Enter your roll" class="from-control" value="<?php echo $singlestudent->roll;?>">
                     </div>
 
                     <div class="model-footer">
