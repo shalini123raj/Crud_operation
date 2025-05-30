@@ -327,70 +327,61 @@
             <div class="jumbotron">
                 <h1 align="center" style="color:aqua;">CRUD CI Operation</h1>
 
-            </div>                 
+            </div>
 
             <div class="container">
                 <div class="clear-fix">
-                    <h3 style="float: left">All Students</h3>
-                    <a href="#" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenSm" style="float: right">Add Student</a>
+                    <h3 style="float: left">All Student Address</h3>
+                    <a href="#" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenSm" style="float: right"> Add Student Address</a>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th style="color: red;">Student Id</th>
-                            <th style="color:red;">Student Name</th>
-                            <th style="color:red">Student Roll</th>
-                            <th style="color:red">Student Class</th>
-                            <th style="color:red">Student Mentor</th>
+                            <th style="color: red;">Student FatherName</th>
+                            <th style="color:red;">Student MotherName</th>
+                            <th style="color:red">Student Address</th>
+                            <th style="color:red">Student Disti</th>
                             <th style="color: red;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                      <?php foreach($student_details as $student):?>
+                       <?php foreach($Address_details as $student_address):?>
                         <tr>
                             <td>
-                                <?php echo $student->id; ?>
+                                <?php echo $student_address->Father_name; ?>
                             </td>
                             <td>
-                                <?php echo $student->name; ?>
+                                <?php echo $student_address->Mother_name; ?>
                             </td>
                             <td>
-                                <?php echo $student->roll; ?>
+                                <?php echo $student_address->Address; ?>
                             </td>
                              <td>
-                                <?php echo $student->class; ?>
+                                <?php echo $student_address->Disti; ?>
                             </td>
                             <td>
-                                <?php echo $student->mentor; ?>
-                            </td>
-                            <td>
-                            <a href="<?php echo base_url();?>Site/editstudent/<?php echo $student->id; ?>"class="btn btn-success">Edit</a>
-                            <a href="<?php echo base_url();?>Site/deletestudent/<?php echo $student->id; ?>"class="btn btn-danger">Delete</a>
+                            <a href="#" class="btn btn-success">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
+                            
+                         <?php endforeach; ?>
 
-                        <?php endforeach; ?>
-                           
-                       
                     </tbody>
                 </table>
 
             </div>
-            <!-- <pre>
-              <!-- <?php
 
-                //  print_r($student_details);
-                // ?>
-            </pre> -->
+              
 
             <div class="modal fade" id="exampleModalFullscreenSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalFullscreenSmLabel" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen-sm-down">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="exampleModalFullscreenSmLabel">Add Student</h6>
+                            <h6 class="modal-title" id="exampleModalFullscreenSmLabel"> Add Student Address</h6>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="p-2" action="<?php echo base_url(); ?>Site/addstudent" method="post">
+                        <form class="p-2" action="<?php echo base_url(); ?>Stud_add/AddStudentAddress" method="post">
                             <div class="model-header d-flex mb-2 justify-content-between border-bottom align-items-center">
 
                                 <h5 class="model-title" id="examplemodellabel">model tittle</h5>
@@ -398,55 +389,53 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                           
-                                <div class="from-group my-3 d-flex flex-column">
-                                    <label for="name" class="text-black fw-bold">Name</label>
-                                    <input type="text" name="name" placeholder="enter your Name" class="from-control">
-                                </div>
-                                <div class="from-group d-flex flex-column">
-                                    <label for="roll" class="text-black fw-bold">Roll</label>
-                                    <input type="text" name="roll" placeholder="enter your Roll" class="from-control">
-                                </div>
-                                <div class="from-group d-flex flex-column">
-                                    <label for="class" class="text-black fw-bold">Class</label>
-                                    <input type="text" name="class" placeholder="enter your Class" class="from-control">
-                                </div>
-                                <div class="from-group d-flex flex-column">
-                                    <label for="mentor" class="text-black fw-bold">Mento</label>
-                                    <input type="text" name="mentor" placeholder="enter your Mentor" class="from-control">
-                                </div>
+
+                            <div class="from-group my-3 d-flex flex-column">
+                                <label for="name" class="text-black fw-bold">Student FatherName</label>
+                                <input type="text" name="fathername" placeholder="enter your FatherName" class="from-control">
+                            </div>
+                            <div class="from-group d-flex flex-column">
+                                <label for="roll" class="text-black fw-bold">Student MotherName</label>
+                                <input type="text" name="mothername" placeholder="enter your MotherName" class="from-control">
+                            </div>
+                            <div class="from-group d-flex flex-column">
+                                <label for="class" class="text-black fw-bold">Student Address</label>
+                                <input type="text" name="Address" placeholder="enter your Address" class="from-control">
+                            </div>
+                            <div class="from-group d-flex flex-column">
+                                <label for="Disti" class="text-black fw-bold">Student Disti</label>
+                                <input type="text" name="disti" placeholder="enter your Disti " class="from-control">
+                            </div>
 
                             <div class="model-footer">
                                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="model">submit</button>
                                 <button type="button" class="btn btn-primary">save changes</button>
                                 <input type="submit" name="insert" value="Add Student" class="btn btn-info"> -->
                             </div>
-                       
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" name="insert" value="Add Student" class="btn btn-info">
-                        </div>
-                         </form>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" name="insert" value="AddStudentAddress" class="btn btn-info">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
-            <?php if($this->session->flashdata('error')): ?>
+            <?php if ($this->session->flashdata('error')): ?>
                 <div align="center" style="color:#FFF" class="bg-danger">
-               <?php  echo $this->session->flashdata('error'); ?>
+                    <?php echo $this->session->flashdata('error'); ?>
                 </div>
-            
             <?php endif; ?>
 
-             <?php if($this->session->flashdata('inserted')): ?>
+            <?php if ($this->session->flashdata('inserted')): ?>
                 <div align="center" style="color:#FFF" class="bg-success">
-               <?php  echo $this->session->flashdata('inserted'); ?>
+                    <?php echo $this->session->flashdata('inserted'); ?>
                 </div>
-            
             <?php endif; ?>
-           
 
-         
+
+
 
             <footer class="footer text-center text-sm-start d-print-none">
                 <div class="container-fluid">

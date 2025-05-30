@@ -1,36 +1,41 @@
 <?php
-class Site extends CI_Controller
+class Stud_add extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    function index()
+    function index()    
     {
+        //  echo "hello";
 
-        $data['student_details'] = $this->Student_model->getAllStudent();
-       
-        // print_r($data['student_details']);
-        // die;
-        $this->load->view('superadmin/base',$data);
+         $data['Address_details'] = $this->Address_model->getAllAddress();
+        //  echo "<pre>";
+        //  print_r($data);
+        //  die;
+          
+
+         $this->load->view('Add_view', $data);
+        //  print_r($data);
+        //  die;
     }
-    public function getStudentByid($id)
+    public function getStudentAddressByid($id)
     {
         //  echo "hrlk";
-        $this->load->model('Student_model');
+        $this->load->model('Address_model');
 
-        $data['students'] = $this->Student_model->select('*', 'student', ['id' => $id]);;
-        $this->load->view('superadmin/view', $data);
+        $data['student_address'] = $this->Address_model->select('*', 'student_address', ['id' => $id]);;
+        $this->load->view('Add_view/Stud_add', $data);
     }
 
 
-    public function addstudent()
+    public function AddStudentAddress()
     {
 
-        $this->load->model('Student_model');
+        $this->load->model('Address_model');
 
-        $this->form_validation->set_rules('name', 'Student Name', 'trim|required');
+        $this->form_validation->set_rules('FatherName', 'MotherName', 'Address', 'Disti','trim|required');
 
         if ($this->form_validation->run() == false) {
             $data_error = [
@@ -42,26 +47,30 @@ class Site extends CI_Controller
 
             $this->session->set_flashdata($data_error);
 
-            redirect('Site');
+            redirect('Stud_add');
         } else {
-            $result = $this->Student_model->insert_student([
+
+              
+            $result = $this->Address_model->insert_student_Address([
                 
-                'name' => $this->input->post('name'),
-                'roll' => $this->input->post('roll'),
-                'class' => $this->input->post('class'),
-                'mentor' => $this->input->post('mentor'),
+                'Father_name' => $this->input->post('fathername'),
+                'Mother_name' => $this->input->post('mothername'),
+                'Address' => $this->input->post('Address'),
+                'Disti' => $this->input->post('disti'),
+                
 
             ]);
+           
             if ($result) {
                 $this->session->set_flashdata('inserted', 'your data has been successfully added!');
             }
-            redirect('Site ');
+            redirect('Stud_add');
         }
     }
 
-    public function editstudent($id)
+    public function editstudentaddresss($id)
     {
-         $data['singlestudent'] = $this->Student_model->getsinglestudent($id);
+         $data['singleaddressstudent'] = $this->Address_model->getSingleStudentAddress($id);
         $this->load->view('edit_view', $data);
         //   print_r($data);
         // die;
