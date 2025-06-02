@@ -15,30 +15,30 @@
     </div>
     <div class="container">
         <h1 align="center" style="color:blue"> Edit Address Student</h1>
-        <form class="p-2 d-flex justify-content-center" action="<?php echo base_url();?> Stud_add/update/<?php echo $singleaddressstudent->id; ?>" method="post">
+        <form class="p-2 d-flex justify-content-center" action="<?php echo base_url();?>Stud_add/update/<?php echo $singleaddressstudent->id; ?>" method="post">
             <div class="model-header mb-2 " style="width: 450px; border:1px solid black;padding:15px">
 
 
                 <div class="model-body p-2">
                     
                     <div class="from-group my-3 d-flex flex-column">
-                        <label  for="Name" class="text-black fw-bold">FatherName</label>
-                        <input type="text" style="color:darkgreen;" name="name" placeholder="Enter your Father_Name" class="from-control" value="<?php echo $singlestudent->name;?>">
+                     <div class="from-group my-3 d-flex flex-column">
+                        <label  for="Fathername" class="text-black fw-bold">Student FatherName</label>
+                        <input type="text" style="color:darkgreen;" name="fathername" placeholder="Enter your fathername" class="from-control" value="<?php echo $singleaddressstudent->Father_name;?>">
                     </div>
                     <div class="from-group d-flex flex-column">
-                        <label for="Roll" class="text-black fw-bold">MorherName</label>
-                        <input type="text" style="color:darkgreen;" name="roll" placeholder="Enter your Mother_Name" class="from-control" value="<?php echo $singlestudent->roll;?>">
+                        <label for="mothername" class="text-black fw-bold">Student MotherName</label>
+                        <input type="text" style="color:darkgreen;" name="motherName" placeholder="Enter your mothername" class="from-control" value="<?php echo $singleaddressstudent->Mother_name;?>">
                     </div>
                                    <div class="from-group d-flex flex-column">
-                                    <label for="class" class="text-black fw-bold">Address</label>
-                                    <input type="text" name="class" placeholder="enter your Address" class="from-control" value="<?php echo $singlestudent->class;?>">
+                                    <label for="address" class="text-black fw-bold">Student Address</label>
+                                    <input type="text" name="address" placeholder="enter your Address " class="from-control" value="<?php echo $singleaddressstudent->Address;?>">
                                    </div>
 
                                  <div class="from-group d-flex flex-column">
-                                 <label for="mentor" class="text-black fw-bold">Disti</label>
-                                 <input type="text" name="mentor" placeholder="enter your Disti" class="from-control" value="<?php echo $singlestudent->mentor;?>">
+                                 <label for="disti" class="text-black fw-bold">Student Disti</label>
+                                 <input type="text" name="Disti" placeholder="enter your Disti" class="from-control" value="<?php echo $singleaddressstudent->Disti;?>">
                                  </div>
-                   
 
                     <div class="model-footer">
                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="model">submit</button>
@@ -71,24 +71,11 @@
 
     <?php endif; ?>
 
-
-     <?php if ($this->session->flashdata('updated')): ?>
+    <?php if ($this->session->flashdata('updated')): ?>
         <div align="center" style="color:#FFF" class="bg-success">
             <?php echo $this->session->flashdata('updated'); ?>
         </div>
-
     <?php endif; ?>
-
-
-    <?php if ($this->session->flashdata('deleted')): ?>
-        <div align="center" style="color:#FFF" class="bg-success">
-            <?php echo $this->session->flashdata('deleted'); ?>
-        </div>
-
-    <?php endif; ?>
-
-
-
 
 
     <footer class="footer text-center text-sm-start d-print-none">

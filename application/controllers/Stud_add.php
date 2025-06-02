@@ -11,8 +11,11 @@ class Stud_add extends CI_Controller
         //  echo "hello";
 
          $data['Address_details'] = $this->Address_model->getAllAddress();
-        //  echo "<pre>";
+         $data['student'] = $this->Address_model->getAllstudent();
+
         //  print_r($data);
+        //  echo "<pre>";
+        //  print_r($data['Address_details']);
         //  die;
           
 
@@ -53,6 +56,7 @@ class Stud_add extends CI_Controller
               
             $result = $this->Address_model->insert_student_Address([
                 
+                'student_id' => $this->input->post('student_id'),
                 'Father_name' => $this->input->post('fathername'),
                 'Mother_name' => $this->input->post('mothername'),
                 'Address' => $this->input->post('Address'),
@@ -71,16 +75,16 @@ class Stud_add extends CI_Controller
     public function editstudentaddresss($id)
     {
          $data['singleaddressstudent'] = $this->Address_model->getSingleStudentAddress($id);
-        $this->load->view('edit_view', $data);
+        $this->load->view('Address_edit_view', $data);
         //   print_r($data);
         // die;
     }
     public function update($id)
     {
 
-        $this->load->model('Student_model');
+        $this->load->model('Address_model');
 
-        $this->form_validation->set_rules('name', 'Student Name', 'trim|required');
+        $this->form_validation->set_rules('FatherName', 'MotherName', 'Address', 'Disti', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data_error = [
@@ -92,14 +96,15 @@ class Stud_add extends CI_Controller
 
             $this->session->set_flashdata($data_error);
 
-            redirect('Site');
+            redirect('Stud_add');
         } else {
-            $result = $this->Student_model->updatestudent([
+            $result = $this->Address_model->UpdateAddressStudent([
                 
-                'name' => $this->input->post('name'),
-                'roll' => $this->input->post('roll'),
-                'class' => $this->input->post('class'),
-                'mentor' => $this->input->post('mentor'),
+                 'student_id' => $this->input->post('student_id'),
+                'Father_name' => $this->input->post('fathername'),
+                'Mother_name' => $this->input->post('motherName'),
+                'Address' => $this->input->post('address'),
+                'Disti' => $this->input->post('Disti'),
 
 
             ], $id);
@@ -107,16 +112,16 @@ class Stud_add extends CI_Controller
             if ($result) {
                 $this->session->set_flashdata('inserted', 'your data has been successfully updated!');
             }
-            redirect('Site');
+            redirect('Stud_add');
         }
 
         
 
     }
 
-    public function deletestudent($id)
+    public function deleteAddressStudent($id)
     {
-         $result = $this->Student_model->deleteItem($id);
+         $result = $this->Address_model ->deleteItem($id);
 
     if ($result) {
         $this->session->set_flashdata('inserted', 'The student has been deleted successfully.');
@@ -124,7 +129,7 @@ class Stud_add extends CI_Controller
         $this->session->set_flashdata('error', 'Failed to delete the student. Please try again.');
     }
 
-    redirect('Site');
+    redirect('Stud_add');
         
     }
 

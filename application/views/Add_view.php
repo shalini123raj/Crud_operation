@@ -337,42 +337,58 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th style="color: red;">Student FatherName</th>
-                            <th style="color:red;">Student MotherName</th>
-                            <th style="color:red">Student Address</th>
+                            <th style="color: red;">STUDENT NAME</th>
+                            <th style="color: red;">STUDENT Roll</th>
+                            <th style="color: red;">STUDENT Class</th>
+                             <th style="color: red;">STUDENT Mentor</th>
+                            <th style="color: red;">STUDENT FatherName</th>
+                            <th style="color:red;">STUDENT MotherName</th>
+                            <th style="color:red">STUDENT Address</th>
                             <th style="color:red">Student Disti</th>
                             <th style="color: red;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       <?php foreach($Address_details as $student_address):?>
-                        <tr>
-                            <td>
-                                <?php echo $student_address->Father_name; ?>
-                            </td>
-                            <td>
-                                <?php echo $student_address->Mother_name; ?>
-                            </td>
-                            <td>
-                                <?php echo $student_address->Address; ?>
-                            </td>
-                             <td>
-                                <?php echo $student_address->Disti; ?>
-                            </td>
-                            <td>
-                            <a href="#" class="btn btn-success">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                            
-                         <?php endforeach; ?>
+                        <?php foreach ($Address_details as $student_address): ?>
+                            <tr>
+                                 <td>
+                                    <?php echo $student_address->name; ?>
+                                </td>
+                                <td>
+                                    <?php echo $student_address->roll; ?>
+                                </td>
+                                  <td>
+                                    <?php echo $student_address->class; ?>
+                                </td>
+                                 <td>
+                                    <?php echo $student_address->mentor; ?>
+                                </td>
+                                <td>
+                                    <?php echo $student_address->Father_name; ?>
+                                </td>
+                                 <td>
+                                    <?php echo $student_address->Mother_name; ?>
+                                </td>
+                                <td>
+                                    <?php echo $student_address->Address; ?>
+                                </td>
+                                <td>
+                                    <?php echo $student_address->Disti; ?>
+                                </td>
+                                <td>
+                                  <a href="<?php echo base_url();?>Stud_add/editstudentaddresss/<?php echo $student_address->id; ?>"class="btn btn-success">Edit</a>
+                                  <a href="<?php echo base_url();?>Stud_add/deleteAddressStudent/<?php echo $student_address->id; ?>"class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
 
                     </tbody>
                 </table>
 
             </div>
 
-              
+
 
             <div class="modal fade" id="exampleModalFullscreenSm" tabindex="-1" role="dialog" aria-labelledby="exampleModalFullscreenSmLabel" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen-sm-down">
@@ -389,6 +405,20 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+
+                            <div class="from-group my-3 d-flex flex-column">
+                                <label for="Name" class="text-black fw-bold">Student Name</label>
+                                <select name="student_id" class="form-control" id="">
+                                    <option value="">Select</option>
+                                    <?php foreach ($student as $s): ?>
+                                        <option value="<?php echo $s->id ?>"><?php echo $s->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+
+                              
+
 
                             <div class="from-group my-3 d-flex flex-column">
                                 <label for="name" class="text-black fw-bold">Student FatherName</label>

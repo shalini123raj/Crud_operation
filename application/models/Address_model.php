@@ -11,7 +11,18 @@ class Address_model extends CI_Model
     }
     public function getAllAddress()
     {
-      $query = $this->db->get('student_address');
+      $this->db->select('sa.*,s.name, s.roll,s.class,s.mentor')->from('student_address as sa');
+      $this->db->join('student as s', 's.id=sa.student_id');
+      
+
+        return $this->db->get()->result();
+
+      
+    }
+
+        public function getAllstudent()
+    {
+      $query = $this->db->get('student');
       if($query){
         return $query->result();
 
@@ -52,7 +63,7 @@ class Address_model extends CI_Model
 
     }
 
-    public function updatestudent($data, $id)
+    public function UpdateAddressStudent($data, $id)
     {
       $this->db->where('id', $id);
       $query = $this->db->update('student_address', $data);
